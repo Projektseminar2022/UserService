@@ -14,6 +14,7 @@ public class User {
     private String country;
 
 
+
     @Id
     @GeneratedValue(
             strategy = GenerationType.AUTO,
@@ -74,4 +75,6 @@ public class User {
     public void setCountry(String country) {
         this.country = country;
     }
+
+
 }
