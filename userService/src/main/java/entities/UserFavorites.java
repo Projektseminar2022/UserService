@@ -17,7 +17,7 @@ public class UserFavorites {
 //    )
 //    @SequenceGenerator(
 //            name = "favorites_id",
-//            sequenceName = "seminarUserService.seq_stellenausschreibung_id",
+//            sequenceName = "seminarUserService.seq_favorites_id",
 //            allocationSize=1
 //    )
 
