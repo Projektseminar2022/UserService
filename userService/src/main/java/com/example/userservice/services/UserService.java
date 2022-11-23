@@ -1,10 +1,10 @@
-package services;
+package com.example.userservice.services;
 
 
-import entities.User;
+import com.example.userservice.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repositories.UserRepository;
+import com.example.userservice.repositories.UserRepository;
 
 import java.util.List;
 

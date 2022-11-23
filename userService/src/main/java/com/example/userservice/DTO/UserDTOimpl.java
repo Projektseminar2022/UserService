@@ -1,6 +1,6 @@
-package DTO;
+package com.example.userservice.DTO;
 
-import entities.User;
+import com.example.userservice.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserDTOimpl implements UserDTO {

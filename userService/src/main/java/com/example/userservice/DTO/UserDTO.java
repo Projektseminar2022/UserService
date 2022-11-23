@@ -1,4 +1,4 @@
-package DTO;
+package com.example.userservice.DTO;
 
 public interface UserDTO {
 

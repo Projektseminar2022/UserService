@@ -1,4 +1,4 @@
-package entities;
+package com.example.userservice.entities;
 import javax.persistence.*;
 
 @Entity
