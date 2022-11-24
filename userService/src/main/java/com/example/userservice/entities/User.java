@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "user", schema = "seminarUserService")
 public class User {
 
+    @Id
     private int id;
     private String email;
     private String password;
