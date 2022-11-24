@@ -2,9 +2,12 @@ package com.example.userservice.services;
 
 
 import com.example.userservice.entities.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.userservice.repositories.UserRepository;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -15,21 +18,22 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User getUserById(Integer id){
-        return userRepository.findById(id).get();
+    public Mono<User> getUserById(Integer id){
+        return userRepository.findById(id);
     }
 
-    public User createUser(User user){
+    public Mono<User> createUser(User user){
         return userRepository.save(user);
     }
 
-    public List<User> getAllUsers(){
+    public Flux<User> getAllUsers(){
         return userRepository.findAll();
     }
 
-    public User deleteById(Integer id){
-        User user = userRepository.findById(id).get();
-        userRepository.deleteById(id);
-        return user;
+    public Mono<Void> deleteById(Integer id){
+        return userRepository.deleteById(id);
+    }
+    public Mono<User> updateUser(User user){
+        return userRepository.save(user);
     }
 }
