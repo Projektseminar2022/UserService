@@ -3,7 +3,10 @@ package com.example.userservice.controllers;
 import com.example.userservice.entities.User;
 import com.example.userservice.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
@@ -14,30 +17,44 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("adduser")
-    public User addUser(@RequestBody User user){
+    @PostMapping(path="adduser",
+                    consumes = MediaType.APPLICATION_JSON_VALUE,
+                    produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @RolesAllowed("user")
+    public Mono<User> addUser(@RequestBody User user){
         return userService.createUser(user);
     }
 
-    @GetMapping("/getuser/{id}")
+    @GetMapping(path ="/getuser/{id}",
+                produces = MediaType.APPLICATION_JSON_VALUE
+    )
     @RolesAllowed("user")
-    public User getUserById(@PathVariable Integer id){
+    public Mono<User> getUserById(@PathVariable Integer id){
         return userService.getUserById(id);
     }
-    @GetMapping("/getusers")
+    @GetMapping(path="/getusers",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     @RolesAllowed("admin")
-    public List<User> getUsers(){
+    public Flux<User> getUsers(){
         return userService.getAllUsers();
     }
 
-    @PostMapping("deleteuser")
-    public User deleteById(Integer id){
+    @PostMapping(path="deleteuser",
+                    produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @RolesAllowed("admin")
+    public Mono<Void> deleteById(Integer id){
         return userService.deleteById(id);
     }
 
-    @PostMapping("/changepass/{id}")
+    @PostMapping(path="/changepass/{id}",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
     @RolesAllowed("admin")
-    public User updatePasswordById(@PathVariable Integer id, @RequestBody User user){
-        return userService.updateUserPassword(id,user);
+    public Mono<User> updateUser(@RequestBody User user){
+        return userService.updateUser(user);
     }
 }
