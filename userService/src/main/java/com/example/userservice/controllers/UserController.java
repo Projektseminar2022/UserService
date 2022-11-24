@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @PostMapping(path="deleteuser",
-                    produces = MediaType.APPLICATION_JSON_VALUE
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     @RolesAllowed("admin")
     public Mono<Void> deleteById(Integer id){
