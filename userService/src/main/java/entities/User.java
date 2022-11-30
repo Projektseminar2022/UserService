@@ -1,5 +1,7 @@
 package entities;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -97,4 +99,10 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_location_preference",
+            joinColumns = @JoinColumn(name =  "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "location_preference_id"))
+    private List<LocationPreference> locationPreferenceList = new ArrayList<>();
+
 }
