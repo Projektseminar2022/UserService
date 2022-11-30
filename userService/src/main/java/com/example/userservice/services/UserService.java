@@ -2,14 +2,12 @@ package com.example.userservice.services;
 
 
 import com.example.userservice.entities.User;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.userservice.repositories.UserRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
 
 
 @Service
