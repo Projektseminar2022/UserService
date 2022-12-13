@@ -1,0 +1,29 @@
+server:
+  port: 8081
+keycloak:
+  auth-server-url: http://localhost:8180/auth
+  realm: seminar
+  resource: springboot-keycloak
+  public-client: true
+  bearer-only: true
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+
+    url: jdbc:postgress://localhost:8001/test?allowPublicKeyRetrieval=true&useSSL=false
+
+    username: seminar
+
+    password: seminar
+
+    jpa:
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+      generate-ddl: true
+
+      show-sql: true
+
+      hibernate:
+
+        ddl-auto: create
