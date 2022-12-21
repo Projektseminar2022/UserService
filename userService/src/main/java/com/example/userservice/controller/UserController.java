@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
@@ -19,11 +20,13 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/user")
+    @RolesAllowed("seminarUser")
     public ResponseEntity<User>save(@RequestBody User user){
         return ResponseEntity.ok(userRepository.save(user));
     }
 
     @GetMapping("/user")
+    @RolesAllowed("seminarUser")
     public ResponseEntity<List<User>>findAll(){
         return ResponseEntity.ok(userRepository.findAll());
     }
