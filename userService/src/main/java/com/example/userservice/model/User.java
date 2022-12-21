@@ -2,6 +2,7 @@ package com.example.userservice.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +20,8 @@ public class User {
     private String password;
     private String city;
     private String country;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Location> prefLocations;
 
 
 }

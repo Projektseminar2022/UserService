@@ -20,13 +20,13 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/user")
-    @RolesAllowed("seminarUser")
+    @RolesAllowed("user")
     public ResponseEntity<User>save(@RequestBody User user){
         return ResponseEntity.ok(userRepository.save(user));
     }
 
     @GetMapping("/user")
-    @RolesAllowed("seminarUser")
+    @RolesAllowed("user")
     public ResponseEntity<List<User>>findAll(){
         return ResponseEntity.ok(userRepository.findAll());
     }
