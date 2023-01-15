@@ -1,52 +1,53 @@
 package com.example.userservice.controller;
 
-
+import com.example.userservice.model.Location;
 import com.example.userservice.model.User;
+import com.example.userservice.model.dto.LocationDto;
 import com.example.userservice.model.dto.UserDto;
+import com.example.userservice.repository.LocationRepository;
 import com.example.userservice.repository.UserRepository;
 import com.example.userservice.services.KeycloakService;
+import lombok.extern.slf4j.Slf4j;
 import org.keycloak.representations.idm.UserRepresentation;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
-import javax.ws.rs.BadRequestException;
-import java.util.List;
 
+import static com.example.userservice.model.dto.LocationDto.fromLocationDto;
+@Slf4j
 @RestController
-public class UserController {
-
+public class LocationController {
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
+    private LocationRepository locationRepository;
+    @Autowired
     private KeycloakService keycloakService;
 
-    @PostMapping("/user")
-    @PermitAll
-    public ResponseEntity<Object>createUser(@Valid @RequestBody UserDto user){
-        UserRepresentation newUser = keycloakService.registerUserInKeycloak(user);
-        if(userRepository.findFirstByEmail(user.getEmail()).isPresent()){
-            return ResponseEntity.badRequest().body("User already exists");
-        }
-        userRepository.save(UserDto.fromUserDto(user, newUser.getId()));
-        return ResponseEntity.ok(newUser);
+    @PostMapping("/location")
+    @RolesAllowed("user")
+    public ResponseEntity<Object> saveLocation(@Valid @RequestBody LocationDto locationDto){
+        User user =userRepository.findFirstByKeycloakId(keycloakService.getId()).orElseThrow();
+
+        return ResponseEntity.ok(locationRepository.save(fromLocationDto(user,locationDto)));
     }
 
-    @GetMapping("/user")
+    @GetMapping("/location")
     @RolesAllowed("user")
-    public ResponseEntity<User>findCurrentUser(){
+    public ResponseEntity<User>getLocations(){
         return ResponseEntity.ok( userRepository.findFirstByKeycloakId(keycloakService.getId()).get());
     }
 
 
-    @DeleteMapping("/user")
+    @DeleteMapping("/location")
     @RolesAllowed("user")
-    public ResponseEntity<User>deleteCurrentUser(){
+    public ResponseEntity<User>deleteLocation(){
         return ResponseEntity.ok( userRepository.deleteByKeycloakId(keycloakService.getId()).get());
     }
 }

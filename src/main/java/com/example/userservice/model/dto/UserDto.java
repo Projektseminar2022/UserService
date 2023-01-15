@@ -39,6 +39,7 @@ public class UserDto {
 
     private List<Location> prefLocations;
 
+
     public static User fromUserDto(UserDto userDto, String keycloakId){
         return new User()
             .setFirstName(userDto.getFirstName())

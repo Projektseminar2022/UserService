@@ -1,7 +1,17 @@
 # UserService
 User Service, Authentication/Autorisation Service
 
-# User anlegen: Post Request:
+
+
+# Keycloak
+<ol>
+<li> create realm with name ProjektSeminar </li>
+<li> lege client : springboot-keycloak an </li>
+<li> lege dort role user und admin an </li>
+<li> realm settings. -> user registration -> assign role ->user </li>
+</ol>
+
+# User anlegen: Post-Request:
 Bsp. Datensatz Postman:
 {      
 "lastName": "Sweeney",
@@ -12,7 +22,12 @@ Bsp. Datensatz Postman:
 "country":"germany"
 }
 
-# create realm with name ProjektSeminar
-# lege client : springboot-keycloak an
-# lege dort role user und admin an
-# realm settings. -> user registration -> assign role ->user
+### login with credentials in keycloak -> get Token
+# get Current User : Get-Request (with Token):
+
+# Location hinzufügen: Post-Request (with Token):
+Bsp. Datensatz Postman:
+{"location":"Bonn",
+"latitude":50.733334,
+"longitude":7.100000
+}
