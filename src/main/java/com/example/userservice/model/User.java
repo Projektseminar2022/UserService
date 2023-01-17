@@ -5,13 +5,13 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Accessors(chain = true)
 @Entity
 @Table
+
 public class User {
 
     @Id
@@ -25,7 +25,7 @@ public class User {
     private String email;
     private String city;
     private String country;
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.REMOVE},mappedBy = "user", fetch = FetchType.EAGER)
     private List<Location> prefLocations;
 
 

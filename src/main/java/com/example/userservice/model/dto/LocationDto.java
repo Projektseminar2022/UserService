@@ -24,7 +24,7 @@ public class LocationDto {
                 .setUser(user)
                 .setLocation(locationDto.getLocation())
                 .setLongitude(locationDto.getLongitude())
-                .setLatitude(locationDto.getLongitude())
+                .setLatitude(locationDto.getLatitude())
                 ;
 
 
@@ -34,7 +34,7 @@ public class LocationDto {
         return new LocationDto()
                 .setLocation(location.getLocation())
                 .setLongitude(location.getLongitude())
-                .setLatitude(location.getLongitude())
+                .setLatitude(location.getLatitude())
                 ;
 
 

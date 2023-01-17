@@ -23,7 +23,7 @@ public class Location {
     @JoinColumn(name = "id")
     @JsonIgnore
     private User user;
-    @Column(name="location",unique = true)
+    //@Column(name="location",unique = true)
     private String location;
     private float longitude;
     private float latitude;

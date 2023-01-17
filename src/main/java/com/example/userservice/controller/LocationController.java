@@ -32,22 +32,19 @@ public class LocationController {
 
     @PostMapping("/location")
     @RolesAllowed("user")
-    public ResponseEntity<Object> saveLocation(@Valid @RequestBody LocationDto locationDto){
+    public ResponseEntity<Location> saveLocation(@Valid @RequestBody LocationDto locationDto){
         User user =userRepository.findFirstByKeycloakId(keycloakService.getId()).orElseThrow();
 
         return ResponseEntity.ok(locationRepository.save(fromLocationDto(user,locationDto)));
     }
 
-    @GetMapping("/location")
-    @RolesAllowed("user")
-    public ResponseEntity<User>getLocations(){
-        return ResponseEntity.ok( userRepository.findFirstByKeycloakId(keycloakService.getId()).get());
-    }
 
 
     @DeleteMapping("/location")
     @RolesAllowed("user")
-    public ResponseEntity<User>deleteLocation(){
-        return ResponseEntity.ok( userRepository.deleteByKeycloakId(keycloakService.getId()).get());
+    public ResponseEntity<Location>deleteLocation(@Valid @RequestBody LocationDto locationDto){
+        User user =userRepository.findFirstByKeycloakId(keycloakService.getId()).orElseThrow();
+
+        return ResponseEntity.ok(locationRepository.deleteLocationByLocationAndUser(fromLocationDto(user,locationDto).getLocation(),user).get());
     }
 }

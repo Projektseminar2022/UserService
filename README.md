@@ -23,6 +23,11 @@ Bsp. Datensatz Postman:
 }
 
 ### login with credentials in keycloak -> get Token
+## postman
+Access-Token-Url; http://localhost:8080/realms/ProjektSeminar/protocol/openid-connect/token
+Client-ID: springboot-keycloak
+scope: openid
+
 # get Current User : Get-Request (with Token):
 
 # Location hinzufügen: Post-Request (with Token):

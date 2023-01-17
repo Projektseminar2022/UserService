@@ -47,6 +47,7 @@ public class UserController {
     @DeleteMapping("/user")
     @RolesAllowed("user")
     public ResponseEntity<User>deleteCurrentUser(){
-        return ResponseEntity.ok( userRepository.deleteByKeycloakId(keycloakService.getId()).get());
+
+        return ResponseEntity.ok( userRepository.deleteByKeycloakId(keycloakService.getId()));
     }
 }
