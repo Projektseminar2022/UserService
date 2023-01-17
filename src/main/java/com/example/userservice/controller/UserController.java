@@ -16,6 +16,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import javax.ws.rs.BadRequestException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -46,7 +47,7 @@ public class UserController {
 
     @DeleteMapping("/user")
     @RolesAllowed("user")
-    public ResponseEntity<User>deleteCurrentUser(){
+    public ResponseEntity<Optional<User>>deleteCurrentUser(){
 
         return ResponseEntity.ok( userRepository.deleteByKeycloakId(keycloakService.getId()));
     }

@@ -16,5 +16,5 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     Optional<User> findFirstByEmail(String email);
     @Transactional
-    User deleteByKeycloakId(String id);
+    Optional<User> deleteByKeycloakId(String id);
 }
