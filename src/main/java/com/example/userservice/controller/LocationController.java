@@ -18,6 +18,8 @@ import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
+import java.util.Optional;
+
 import static com.example.userservice.model.dto.LocationDto.fromLocationDto;
 @Slf4j
 @RestController
@@ -42,9 +44,9 @@ public class LocationController {
 
     @DeleteMapping("/location")
     @RolesAllowed("user")
-    public ResponseEntity<Location>deleteLocation(@Valid @RequestBody LocationDto locationDto){
+    public ResponseEntity<Optional<Location>>deleteLocation(@Valid @RequestBody LocationDto locationDto){
         User user =userRepository.findFirstByKeycloakId(keycloakService.getId()).orElseThrow();
 
-        return ResponseEntity.ok(locationRepository.deleteLocationByLocationAndUser(fromLocationDto(user,locationDto).getLocation(),user).get());
+        return ResponseEntity.ok(locationRepository.deleteLocationByLocationAndUser(fromLocationDto(user,locationDto).getLocation(),user));
     }
 }

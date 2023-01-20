@@ -16,5 +16,5 @@ public interface LocationRepository extends JpaRepository<Location,Long> {
 
     @Transactional
     //@Query("delete from Location l where l.location = :location AND l.user = :user ")
-    Optional<Location> deleteLocationByLocationAndUser(@Param("location")String location,@Param("user")User user);
+    Optional <Location>deleteLocationByLocationAndUser(String location,User user);
 }
