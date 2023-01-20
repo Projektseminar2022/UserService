@@ -1,5 +1,5 @@
 # UserService
-User Service, Authentication/Autorisation Service
+User Service, Authentication/Authorization Service
 
 
 
